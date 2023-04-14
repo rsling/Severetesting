@@ -1,5 +1,6 @@
-SEV <- function(h0 = 0, h1 = "greater", sig = 0.05, sd = 2, n = 100, outcome = 0.4,
-                range = c(0, 1), interval = 0.01, distfunc = pnorm) {
+SEV <- function(h0 = 0, h1 = "greater", sig = 0.05, sd = 2, n = 100,
+                outcome = 0.4, range = c(0, 1), interval = 0.01,
+                distfunc = pnorm) {
 
   # Do sig test.
   .se <- sd/sqrt(n)
@@ -16,7 +17,8 @@ SEV <- function(h0 = 0, h1 = "greater", sig = 0.05, sd = 2, n = 100, outcome = 0
   .zs <- .zs - .z
   .sev <- 1-distfunc(.zs)
 
-  .r <- list(se = .se, z = .z, p = .p, sig = .sig, x = .x, ds = .ds, zs = .zs, sev = .sev)
+  .r <- list(se = .se, z = .z, p = .p, sig = .sig, x = .x, ds = .ds, zs = .zs,
+             sev = .sev)
 }
 
 # Some configurability by passing custom distribution function.
