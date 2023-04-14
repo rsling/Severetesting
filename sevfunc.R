@@ -7,6 +7,10 @@ SEV <- function(h0 = 0, h1 = "greater", sig = 0.05, sd = 2, n = 100,
   .z <- (outcome-h0)/.se
   .p <- 1-distfunc(.z)
   .sig <- .p <= sig
+  if (!.sig) {
+    warning(paste0("p = ", round(.p,4), " < ", round(sig, 4),
+                   "! Do not interpret severity."))
+    }
 
   # Get hypothetical discrepancies.
   .ds <- seq(range[1], range[2], interval)
@@ -25,7 +29,8 @@ SEV <- function(h0 = 0, h1 = "greater", sig = 0.05, sd = 2, n = 100,
 tdist <- function(q) { pt(q = q, df = n - 1) }
 
 # Get severity for t Test and H0: mu = 1; H1: mu > 1.
-sev <- SEV(h0 = 1, distfunc = tdist)
+sev <- SEV(h0 = 0, distfunc = tdist, n = 50)
 
-print(sev)
+# print(sev)
 plot(unlist(sev["sev"]), type = "l")
+
