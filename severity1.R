@@ -50,7 +50,7 @@ xs <- seq(-1, 1.5, 0.01)
 sev <- 1-qnorm(p = 0.4, mean = 0.2, sd = se, lower.tail = T)
 
 plot(dnorm(xs, mean = 0, sd = se), type = "l", xaxt = "n", col = 1, lwd = 2,
-     main = "Severity for observed μ[obs] = 0.4 ; H0: μ = 0 ; H1: μ = 0.2",
+     main = "Severity for observed μ[obs] = 0.4 ; H0: μ = 0 ; H1': μ = 0.2",
      ylab="", xlab = "", yaxt = "n", frame.plot = F)
 lines(rep(which.min(abs(xs - 0)), 2), c(0, dnorm(0, mean = 0, sd = se)), col = 1, lwd = 1, lty = 3)
 
@@ -68,5 +68,5 @@ polygon(c(x.start, x.start:x.end), c(0, y1.all), col = "darkblue")
 axis(1, at = seq(1:length(xs))[c(TRUE, rep(FALSE, 9))], labels = xs[c(TRUE, rep(FALSE, 9))])
 text(x = 35, y = 1.6, labels = paste0("Norm dist for\nH0: μ = 0 at SE = ", se))
 text(x = 35, y = 0.8, labels = paste0("Rejection region for H0\np = ", round(ps[1], 2)), col = "darkblue")
-text(x = 200, y = 1.6, labels = paste0("Norm dist for\nH1: μ = 0.2 at SE = ", se), col ="darkred")
-text(x = 200, y = 0.8, labels = paste0("SEV tail for H1: μ = 0.2\nif μ[obs] = 0.4\nSEV = 1 – ", round(1-sev, 2), " = ", round(sev,2)), col ="darkgreen")
+text(x = 200, y = 1.6, labels = paste0("Norm dist for\nH1': μ = 0.2 at SE = ", se), col ="darkred")
+text(x = 200, y = 0.8, labels = paste0("SEV tail for H1': μ = 0.2\nif μ[obs] = 0.4\nSEV = 1 – ", round(1-sev, 2), " = ", round(sev,2)), col ="darkgreen")
