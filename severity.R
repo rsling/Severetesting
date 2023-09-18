@@ -59,9 +59,12 @@ plot(sevs1, type = "l", xaxt = "n", bty = "n", ylab = "", xlab = "",
 lines(sevs2, col = 2, lty =2, lwd = 2)
 lines(sevs3, col = 3, lty = 3, lwd = 2)
 
-abline(v = 0.2 * 100, col = 4, lty = 4)
-text(x = 0.21 * 100, y = 0.4, labels = "discrepancy\nunder H1'\n(SEV eval)",
-     col = 4, adj = 0)
+lines(x = c(20, 20, 0), y = c(0, sevs1[which(ds == 0.2)], sevs1[which(ds == 0.2)]), col = "darkgreen", lty = 2, lwd = 1)
+text(x = 22, y = 0.4, labels = "H1': mu >= 2", col = "darkgreen", adj = 0, srt = 90)
+
+lines(x = c(30, 30, 0), y = c(0, sevs1[which(ds == 0.3)], sevs1[which(ds == 0.3)]), col = "violet", lty = 2, lwd = 1)
+text(x = 32, y = 0.2, labels = "H1'': mu >= 3", col = "violet", adj = 0, srt = 90)
+
 
 lines(x = c(mu1 * 100, mu1 * 100), y = c(0, sevs1[mu1*100]),
       col = 1, lty = 1, lwd = 2)
@@ -78,7 +81,7 @@ text(x = (mu3 + 0.01) * 100, y = 0.4, labels = "", col = 3, adj = 0)
 axis(1, at = seq(0, 100, 10), labels = seq(0, 1, 0.1))
 title("Severity for H0:mu=0; H1:mu>0",
       xlab="Inferred discrepancy from H0 (lower bound)", ylab="SEV")
-legend("bottomleft", c("Xbar=0.4", "Xbar=0.6", "Xbar=1.0"),
+legend("bottomleft", c("mu[obs]=0.4", "mu[obs]=0.6", "mu[obs]=1.0"),
        bty = "n", col = 1:3, lty = 1:3, cex = 0.75, lwd = 2)
 
 if (save.pdf) dev.off()
