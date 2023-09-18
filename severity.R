@@ -1,3 +1,5 @@
+save.pdf = F
+
 # Sig level.
 sig <- 0.05
 
@@ -49,13 +51,16 @@ sevs3 <- 1-pnorm(z3s)
 # 4. Make sure you understand the results bloody well. — Thanks, Jackie!
 
 # 5. Plot it to impress sharp-minded scientists.
+
+if (save.pdf) pdf("severity.pdf")
+
 plot(sevs1, type = "l", xaxt = "n", bty = "n", ylab = "", xlab = "",
      col = 1, lty = 1, lwd = 2)
 lines(sevs2, col = 2, lty =2, lwd = 2)
 lines(sevs3, col = 3, lty = 3, lwd = 2)
 
 abline(v = 0.2 * 100, col = 4, lty = 4)
-text(x = 0.21 * 100, y = 0.4, labels = "discrepancy\nunder H1'\n(severity eval)",
+text(x = 0.21 * 100, y = 0.4, labels = "discrepancy\nunder H1'\n(SEV eval)",
      col = 4, adj = 0)
 
 lines(x = c(mu1 * 100, mu1 * 100), y = c(0, sevs1[mu1*100]),
@@ -76,4 +81,4 @@ title("Severity for H0:mu=0; H1:mu>0",
 legend("bottomleft", c("Xbar=0.4", "Xbar=0.6", "Xbar=1.0"),
        bty = "n", col = 1:3, lty = 1:3, cex = 0.75, lwd = 2)
 
-
+if (save.pdf) dev.off()
