@@ -48,9 +48,3 @@ cat("Power = ", power, "\n", sep="")
 print(pwr.norm.test(effect/sd, n, sig, NULL, alternative = "greater"))
 
 
-
-
-plot(dnorm(seq(-1, 3, 0.1), mean = mu, sd = se), type="l", xaxt = "n", ylab = "Density")
-axis(1, at = seq(0, 40), labels = seq(-1, 3, 0.1))
-
-lines(dnorm(seq(-1, 3, 0.1), mean = mu+effect, sd = se))
