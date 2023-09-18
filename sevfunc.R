@@ -18,8 +18,11 @@ SEV <- function(h0 = 0, h1 = "greater", sig = 0.05, sd = 2, n = 100,
 
   # Get SEV for hypothetical discrepancies.
   .zs <- .ds/.se
+  print(.zs)
   .zs <- .zs - .z
+  print(.zs)
   .sevs <- 1-distr(.zs)
+  print(.sevs)
 
   # Return everything.
   list(se = .se, z = .z, p = .p, sig = .sig, x = .x, ds = .ds, zs = .zs,
@@ -44,5 +47,6 @@ SEV.query <- function(mu, sev, distr = pnorm) {
 # sev <- SEV(distr = tdist)
 
 sev <- SEV()
-plot(sev[["sevs"]], type = "l")
+plot(sev[["sevs"]], type = "l", xaxt="n", xlab = "Outcomes")
+axis(1, at = seq(0, 100, 2), labels = seq(-2, +3, 0.1))
 print(SEV.query(mu = 0.2, sev = sev))

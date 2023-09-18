@@ -55,7 +55,7 @@ lines(sevs2, col = 2, lty =2, lwd = 2)
 lines(sevs3, col = 3, lty = 3, lwd = 2)
 
 abline(v = 0.2 * 100, col = 4, lty = 4)
-text(x = 0.21 * 100, y = 0.4, labels = "discrepancy\nunder H1",
+text(x = 0.21 * 100, y = 0.4, labels = "discrepancy\nunder H1'\n(severity eval)",
      col = 4, adj = 0)
 
 lines(x = c(mu1 * 100, mu1 * 100), y = c(0, sevs1[mu1*100]),

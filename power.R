@@ -14,20 +14,25 @@ mu <- 1
 se <- sd/sqrt(n)
 cat("SE = ", se, "\n", sep="")
 
-# At which discrepancy would we reject H0? (Note: single-sided test!)
+# At which discrepancy (= critical value) would we reject H0?
+# (Note: single-sided test, 1.65 not 1.98!)
 discrepancy <- abs(qnorm(sig)) * se
-cat("Discepancy lower bound at sig = ", discrepancy, "\n", sep="")
+cat("Discepancy lower bound at given sig level = ", discrepancy, "\n", sep="")
+cat("Thus, we will reject H0:mu=1 if mu0⩾", mu + discrepancy, "\n", sep ="")
 
 # We now need the Type 2 error rate: P(H0 not rejected; H0 is false)
 #
-# Be mu0 the measured mean, mu the assumed lower bound of the  population mean
-# under H1. We do not reject H0 if mu0 < mu + discrepancy, in other words if
-# the measured mean is smaller than mu under the H0 PLUS the discrepancy
-# required to reach sig = 0.05.
+# Be mu0 the measured mean, mu the assumed lower bound of the population mean
+# under H1: mu=1. We do NOT reject H0 if mu0 < mu + discrepancy, in other
+# words if the measured mean is smaller than mu under the H0 PLUS the
+# discrepancy required to reach sig = 0.05.
 #
 # We assume an effect size of 0.5. The true mean (in order to constitute a
 # discrepancy worthy of mentioning) should thus be at least 1.5.
 effect <- 0.5
+
+cat("Expected effect is ", effect, ". Hence, we expect the population mean ",
+    "to be mu+effect=", mu + effect, ".", sep="")
 
 # We now need: p(mu0 < mu + discrepancy) if mu = 1.5. This is the type 2 error
 # rate. If mu = 1.5 and we reject the H0 then z.t2 < (discrepancy - effect)/se
@@ -42,3 +47,10 @@ cat("Power = ", power, "\n", sep="")
 # Which is confirmed by the function from pwr.
 print(pwr.norm.test(effect/sd, n, sig, NULL, alternative = "greater"))
 
+
+
+
+plot(dnorm(seq(-1, 3, 0.1), mean = mu, sd = se), type="l", xaxt = "n", ylab = "Density")
+axis(1, at = seq(0, 40), labels = seq(-1, 3, 0.1))
+
+lines(dnorm(seq(-1, 3, 0.1), mean = mu+effect, sd = se))
