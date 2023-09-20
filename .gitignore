@@ -1,3 +1,10 @@
+# output html
+*.html
+# cache
+*_files/
+# dynamic idiosyncrasies
+packages.bib
+
 # History files
 .Rhistory
 .Rapp.history
