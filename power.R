@@ -20,6 +20,8 @@ discrepancy <- abs(qnorm(sig)) * se
 cat("Discepancy lower bound at given sig level = ", discrepancy, "\n", sep="")
 cat("Thus, we will reject H0:mu=1 if mu0⩾", mu + discrepancy, "\n", sep ="")
 
+# FG: that should be the discrepancy on the scale of the sample mean.
+
 # We now need the Type 2 error rate: P(H0 not rejected; H0 is false)
 #
 # Be mu0 the measured mean, mu the assumed lower bound of the population mean
@@ -29,7 +31,7 @@ cat("Thus, we will reject H0:mu=1 if mu0⩾", mu + discrepancy, "\n", sep ="")
 #
 # We assume an effect size of 0.5. The true mean (in order to constitute a
 # discrepancy worthy of mentioning) should thus be at least 1.5.
-effect <- 0.5
+effect <- 0.5 # on the scale of the mean
 
 cat("Expected effect is ", effect, ". Hence, we expect the population mean ",
     "to be mu+effect=", mu + effect, ".", sep="")
