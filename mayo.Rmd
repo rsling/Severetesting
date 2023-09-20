@@ -1,0 +1,112 @@
+---
+title: "Title"
+author: "Felix Golcher"
+date: "`r format(Sys.time(), '%d %B, %Y %H:%M')`"
+bibliography:
+  - packages.bib
+_nocite: '@*'
+output:
+  bookdown::html_document2:
+    toc: true
+    toc_float: true
+    toc_depth: 6
+    number_sections: true
+    fig_caption: yes
+    table_caption: yes
+    df_print: "paged"
+---
+
+
+
+```{r, include=FALSE, cache=F}
+knitr::opts_chunk$set(cache=T,
+                      autodep = T,
+                      warning = F,
+                      message = F)
+local({
+  src_old <- knitr::knit_hooks$get("source")  # save the old hook
+  lbl <- function(x, options, old){ # show chunk label in outptu
+    lbl <- paste0('<div class="tagit">',options$label,'</div>')
+    paste(lbl,
+          old(x, options),
+          collapse="\n")
+  }
+  knitr::knit_hooks$set(source = function(x, options) {
+    lbl(x, options, src_old)
+  })
+  knitr::opts_hooks$set(fig.cap = function(options){
+    options$echo = F ## don't show code of figures if fig.cap is set.
+    options
+  })
+  knitr::knit_hooks$set(fig.cap = function(before, options, envir){
+    # label figures with the code block label as well.
+    lbl <- paste0('<div class="tagfig">',options$label,'</div>')
+    if(!before & options$eval & knitr::opts_chunk$get("eval"))
+      return(lbl)
+    })
+})
+```
+
+```{r packages, include=FALSE, cache=FALSE}
+basepacks <- .packages()
+library(tidyverse)
+knitr::write_bib(.packages(), "packages.bib")
+```
+
+# Fig 2
+
+```{r, include=FALSE}
+sigma <- 2
+n <- 100
+(sigma_bar <- 2/sqrt(n))
+alpha <- .05/2
+qnorm(1-alpha)
+ds <- c(2,3,5)
+mu_cut <- .2
+d_cut <- mu_cut*sqrt(n)
+SEV_1 <- pnorm(d_cut/ds[1])
+```
+
+```{r devsev}
+severity <- function(mu1, xbar, sd=2, n=100){
+  sdbar <- sd/sqrt(n)
+  pnorm(xbar, mu1, sdbar, lower.tail = T)
+}
+severity(xbar = .4, mu1 = .2)
+```
+
+```{r f2, fig.cap="This should be Fig 2 approximately, and Fig 2 includes Fig 3, meaning I'm no dumbass."}
+ggplot()+
+  xlim(-.1,.9)+
+  geom_function(fun=severity, args=list(xbar=.4))+
+  geom_function(fun=severity, args=list(xbar=.6))+
+  geom_function(fun=severity, args=list(xbar=.8))+
+  geom_vline(xintercept = .2)
+```
+
+
+# loaded packges
+
+```{r, results='asis', echo=FALSE, cache=FALSE}
+pck <- sort(setdiff(.packages(), basepacks))
+cat(paste0("* ",pck," [@R-", pck,"]", collapse = "\n"))
+```
+
+```{css, echo=FALSE}
+.tagit {
+  display: inline-block;
+  position: absolute;
+  left: -7em;
+  color: #6c89ea;
+}
+.tagfig {
+  display: inline-block;
+  position: relative;
+  left: -7em;
+  color: #cb798f;
+  top: -2em;
+}
+```
+
+
+# References
