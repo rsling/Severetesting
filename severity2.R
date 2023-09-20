@@ -77,11 +77,11 @@ polygon(c(x.start, x.start:x.end), c(0, y1.all), col = "darkblue")
 
 axis(1, at = seq(1:length(xs))[c(TRUE, rep(FALSE, 9))], labels = xs[c(TRUE, rep(FALSE, 9))])
 text(x = 35, y = 1.6, labels = paste0("Norm dist for\nH0: mu = 0 at SE = ", se))
-text(x = 200, y = 1.9, labels = paste0("Norm dist for\nH1': mu >= 0.2 at SE = ", se), col ="darkred")
-text(x = 200, y = 1.6, labels = paste0("Norm dist for\nH1'': mu >= 0.3 at SE = ", se), col ="orange")
+text(x = 200, y = 1.9, labels = paste0("Norm dist for\nH1': mu <= 0.2 at SE = ", se), col ="darkred")
+text(x = 200, y = 1.6, labels = paste0("Norm dist for\nH1'': mu <= 0.3 at SE = ", se), col ="orange")
 
-text(x = 200, y = 1.2, labels = paste0("SEV tail for H1'': mu >= 0.3\nif mu[obs] = 0.4\nSEV = 1 - ", round(1-sev2, 2), " = ", round(sev2,2)), col ="violet")
-text(x = 200, y = 0.8, labels = paste0("SEV tail for H1': mu >= 0.2\nif mu[obs] = 0.4\nSEV = 1 - ", round(1-sev, 2), " = ", round(sev,2)), col ="darkgreen")
+text(x = 200, y = 1.2, labels = paste0("SEV tail for H1'': mu <= 0.3\nif mu[obs] = 0.4\nSEV = 1 - ", round(1-sev2, 2), " = ", round(sev2,2)), col ="violet")
+text(x = 200, y = 0.8, labels = paste0("SEV tail for H1': mu <= 0.2\nif mu[obs] = 0.4\nSEV = 1 - ", round(1-sev, 2), " = ", round(sev,2)), col ="darkgreen")
 text(x = 200, y = 0.45, labels = paste0("Tail for rejection of H0\np = ", round(ps[1], 2)), col = "darkblue")
 
 if (save.pdf) dev.off()
