@@ -28,9 +28,9 @@ p2 <- 1-pnorm(z2)
 z3 <- mu3/se
 p3 <- 1-pnorm(z3)
 
-p1 <= sig
-p2 <= sig
-p3 <= sig
+cat("p1=", p1, " reaches sig level: ", p1 <= sig, "\n", sep="")
+cat("p2=", p2, " reaches sig level: ", p2 <= sig, "\n", sep="")
+cat("p3=", p3, " reaches sig level: ", p3 <= sig, "\n", sep="")
 
 ### Severity curves for the outcomes.
 
