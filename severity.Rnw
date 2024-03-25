@@ -1,0 +1,319 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[margin=3cm]{geometry}
+\usepackage[ngerman]{babel}
+\usepackage{libertine}
+\usepackage{setspace}
+\usepackage{amsmath}
+
+\title{Severity}
+\author{Roland Schäfer}
+\date{\today}
+
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\maketitle
+
+\onehalfspacing
+
+\section{Nomenklatur}
+
+Im Folgenden wird $\mu$ für den \textit{wahren Mittelwert} verwendet.
+Der Mittelwert unter der Nullhypothese sei $\mu_0$.
+Gemessene Werte werden als $\mu_n$ mit $n$ als Index angegeben (bei Mayo auch $\bar{x}$).
+Die unter der Auswertung von Severity betrachteten Partikularhypothesen bezeichnen wir hier als $\mu'$.
+Bei Mayo heißen diese Hypothesen $\mu_1$.
+
+\section{Test}
+\label{sec:signifikanztest}
+
+Ein einseitiger Test liefert die frequentistische Wahrscheinlichkeit, das konkrete Ergebnis oder ein extremeres zu finden, wenn die $H_0$ korrekt ist.
+Analog zum Artikel anhand eines z-Tests über Mittelwerte:
+Wir betrachten die $H_0$ in (\ref{eq:h0}).
+
+\begin{equation}
+  H_0: \mu_0=0
+  \label{eq:h0}
+\end{equation}
+
+In Worten: \textit{Der Mittelwert unter der Nullhypothese ist 0}.
+Für die Illustration nehmen wir einen einseitigen -- hier rechtsseitigen -- Test gemäß (\ref{eq:h1}).
+In Worten: \textit{Der Mittelwert unter der Nullhypothese ist größer als 0}.
+
+\begin{equation}
+  H_1: \mu>0
+  \label{eq:h1}
+\end{equation}
+
+Die Varianz sei bekannt ($\sigma = 2$), und wir gehen von einer Stichprobengröße von $n=100$ aus.
+Damit ist der Standardfehler gegeben gemäß (\ref{eq:se}).
+
+\begin{equation}
+  SE=\frac{\sigma}{\sqrt{n}}=\frac{2}{10}=0.2
+  \label{eq:se}
+\end{equation}
+
+Wir betrachten die drei möglichen Ausgänge des Experiments: $\mu_1=0.4$, $\mu_2=0.6$ und $\mu_3=1.0$.
+In einem Fisherschen Rahmen können diese Beobachtungen die $H_0$ zurückweisen, hier zu $sig=0.025$ (bzw. $2\sigma$).
+Am Beispiel $\mu_1$ gezeigt in (\ref{eq:sigtest}) mit $\mathcal{N}$ als kumulativer Verteilungsfunktion der Standardnormalverteilung.
+
+\begin{equation}
+  P(\mu_1\geq0.4; \mu=\mu_0=0)=1-\mathcal{N}(\frac{\mu_1}{SE})=1-\mathcal{N}(2)=0.023
+  \label{eq:sigtest}
+\end{equation}
+
+Anders formuliert erreichen wir $2\sigma$, denn (\ref{eq:sigma}).
+
+\begin{equation}
+  \frac{\mu_1}{SE}=\frac{0.4}{0.2}=2
+  \label{eq:sigma}
+\end{equation}
+
+\section{Severity}
+\label{sec:severity}
+
+\subsection{Grundidee}
+
+Der Test aus Abschnitt~\ref{sec:signifikanztest} verläuft bei einer binären Entscheidung für oder gegen eine Zurückweisung der $H_0$ in allen drei betrachteten Fällen gleich.
+Die $H_0$ wird zurückgewiesen.
+Der p-Wert gibt zusätzlich darüber Auskunft, wie gut die Evidenz für die Zurückweisung war, denn (\ref{eq:sigdiff}).
+
+\begin{equation}
+  P(\mu_1\geq0.4; \mu=0) < P(\mu_2\geq0.6; \mu=0) < P(\mu_3\geq1.0; \mu=0)
+  \label{eq:sigdiff}
+\end{equation}
+
+Der Ausgang $\mu_3$ liefert also stärkere Evidenz gegen die $H_0$ als der Ausgang $\mu_2$ usw.
+Severity quantifiziert darüberhinaus, \textbf{wie gut die Evidenz für konkrete Abweichungen von der $\mathbf{H_0}$} ist.
+Sie beantwortet also Fragen wie:
+\textit{Wie gut ist die Evidenz $\mu_1=0.4$ für eine Abweichung von $\gamma=0.2$ von $H_0$?}
+Die Abweichung $\gamma$ ist hier eine \textit{Effektstärke} im Sinn von Power-Berechnungen.
+
+Dazu betrachten wir zusätzlich zur $H_1: \mu>0$ auf Basis eines konkreten signifikanten Ausgangs eines Experiments weitere Partikularhypothesen $H'$ über den wahren Wert $\mu$ wie in (\ref{eq:h1prime}).
+
+\begin{equation}\begin{aligned}
+  H': \mu>\mu'\\
+  \mu'=\mu_0+\gamma
+  \label{eq:h1prime}
+\end{aligned}\end{equation}
+
+Der Unterschied zwischen $\mu$ und $\mu_0$ ist hier eventuell relevant.
+Der Test weist die $H_0$ über einen arbiträr gesetzten Wert $\mu_0$ zurück und sagt im Prinzip damit wenig über $\mu$.
+Severity quantifiziert die Evidenz für Schätzwerte $\mu'$ des wahren Werts $\mu$ als Abweichung von $\mu_0$ um die Differenz $\gamma$.
+Diese Betrachtung ist zulässig, sofern der Test bereits gezeigt hat, dass es gute Evidenz dafür gibt, dass die $H_0$ (in die erwartete Richtung) inkorrekt ist.
+
+\subsection{Wann ist Severity niedrig?}
+
+Wir setzen als Beispiel $\mu'=0.2$.
+Die Severity für $\mu'$ soll \textbf{niedrig} sein, wenn bei $\mu'=\mu=0.2$ der konkrete Messwert $\mu_1$ trotzdem sehr häufig (= frequentistisch wahrscheinlich) ist.
+Dies ist generell der Fall, wenn die Stichprobe klein oder die Varianz groß ist.
+Es ist unabhängig davon auch der Fall, wenn die Differenz zwischen $\mu'$ und $\mu_1$ größer bzw.\ positiver wird, wenn wir also eine stärkere Inferenz bezüglich der Punktschätzung des wahren Werts tätigen wollen.
+Im betrachteten Beispiel ($\mu'=0.2$) ist $\mu'-\mu_1=0.2-0.4=-0.2$.
+Würden wir hingegen eine Partikularhypothese $\mu'=0.6$ betrachten, wäre $\mu'-\mu_1=0.6-0.4=0.2$.
+Bei gleichbleibender Varianz und Stichprobengröße sollte dies auch (wenn $\mu'=\mu=0.2$) intuitiv unwahrscheinlicher sein, denn eine Beobachtung von $0.4$ liefert schlechtere Evidenz für eine Abweichung um $0.6$ von $0$ als für eine Abweichung von $0.2$ von $0$.
+Es wird deutlich, dass die ursprüngliche $H_0$ und die Richtung der Ausgangshypothese mit Severity zusammenhängen.
+Bei einem linksseitigen Test sollte Severity hingegen kleiner werden, je kleiner (bzw.\ je negativer) die Differenz zwischen $\mu'$ und $\mu_1$ wird.
+
+\subsection{Wann ist Severity hoch?}
+
+Die Severity für $\mu'=0.2$ soll nun \textbf{hoch} sein, wenn der Messwert $\mu_1=0.4$ selten zu erwarten ist, falls $\mu'=\mu$.
+
+(Wird fortgesetzt.)
+
+\subsection{Veranschaulichung und Berechnung}
+
+Abbildung~\ref{fig:sev1} zeigt die Situation für $\mu'=0.2$.
+Die schwarze Kurve zeigt die Dichte der Standardnormalverteilung für den ursprünglichen Test, der mit $p=0.023$ die $H_0$ zurückweisen konnte.
+Die blaue Schleppe für den Beobachtungswert $\mu_1=0.4$ entspricht $2.3$\% der frequentistisch erwartbaren Werte.
+Unter der Annahme, dass $\mu=\mu'=0.2$, zeigt bei den gleichen Parametern $\sigma$ und $n$ die rote Kurve die erwartete Verteilung der Messwerte um $\mu'=0.2$.
+Die grüne Schlepppe (ebenfalls für den Beobachtungswert $\mu_1=0.4$) entspricht dem Anteil der erwarteten Messwerte, die dann größer oder gleich $0.4$ sind.
+Da $SE=0.2$ und $\mu_1-\mu'=0.2$, entspricht dies $1-\mathcal{N}(1)=0.16$.
+In diesem Fall wären also $\mathcal{N}(1)=0.84$ ($84$\%) der Werte kleiner als $0.4$, also (\ref{eq:sev1}).
+Die Klausel \textit{is true} nach dem Semikolon wurde als redundant ausgelassen.
+
+\begin{equation}
+  SEV(\mu>0.2)=(P(\bar{X})<0.4;\mu\leq 0.2)
+  \label{eq:sev1}
+\end{equation}
+
+<<sev1, dev='pdf', echo=FALSE, fig.cap="Severity for H': mu'>0.2 bei der Beobachtung mu1=0.4", fig.height=4, fig.pos="!htbp">>=
+sd <- 2
+n <- 100
+se <- sd/sqrt(n)
+mubar = 0.2
+muobs <- 0.4
+xs <- seq(-1, 1.5, 0.01)
+sev <- 1-qnorm(p = 0.4, mean = mubar, sd = se, lower.tail = T)
+
+plot(dnorm(xs, mean = 0, sd = se), type = "l", xaxt = "n", col = 1, lwd = 2,
+     ylab="", xlab = "", yaxt = "n", frame.plot = F)
+lines(rep(which.min(abs(xs - 0)), 2), c(0, dnorm(0, mean = 0, sd = se)), col = 1, lwd = 1, lty = 3)
+
+lines(dnorm(xs, mean = mubar, sd = se), col = "darkred", lwd = 2)
+lines(rep(which.min(abs(xs - mubar)), 2), c(0, dnorm(mubar, mean = mubar, sd = se)), col = "darkred", lwd = 1, lty = 3)
+
+x.start <- which.min(abs(xs - muobs))
+x.end <- length(xs)
+y1.all <- dnorm(seq(muobs, 1.5, 0.01), mean = 0, sd = se)
+y2.all <- dnorm(seq(muobs, 1.5, 0.01), mean = mubar, sd = se)
+polygon(c(x.start, x.start:x.end), c(0, y2.all), col = "darkgreen")
+polygon(c(x.start, x.start:x.end), c(0, y1.all), col = "darkblue")
+
+axis(1, at = seq(1:length(xs))[c(TRUE, rep(FALSE, 9))], labels = xs[c(TRUE, rep(FALSE, 9))])
+@
+
+Berechnet wird hier die \textit{minimale} Severity.
+Abbildung~\ref{fig:sev2} zeigt dasselbe für $\mu'=0.1$.
+Trivialerweise $\mu_1-\mu'=0.4-0.1=0.3$.
+Bei $SE=0.2$ entspricht die Fläche unter der Kurve minus der grünen Schleppe einem Anteil von $\mathcal{N}(1.5)=0.93$.
+Kleinere $\delta$ entsprechen größeren Wahrscheinlichkeiten, also einer größeren Severity.
+
+<<sev2, dev='pdf', echo=FALSE, fig.cap="Severity for H': mu'>0.1 bei der Beobachtung mu1=0.4", fig.height=4, fig.pos="!htbp">>=
+sd <- 2
+n <- 100
+se <- sd/sqrt(n)
+mubar = 0.1
+muobs <- 0.4
+xs <- seq(-1, 1.5, 0.01)
+sev <- 1-qnorm(p = 0.4, mean = mubar, sd = se, lower.tail = T)
+
+plot(dnorm(xs, mean = 0, sd = se), type = "l", xaxt = "n", col = 1, lwd = 2,
+     ylab="", xlab = "", yaxt = "n", frame.plot = F)
+lines(rep(which.min(abs(xs - 0)), 2), c(0, dnorm(0, mean = 0, sd = se)), col = 1, lwd = 1, lty = 3)
+
+lines(dnorm(xs, mean = mubar, sd = se), col = "darkred", lwd = 2)
+lines(rep(which.min(abs(xs - mubar)), 2), c(0, dnorm(mubar, mean = mubar, sd = se)), col = "darkred", lwd = 1, lty = 3)
+
+x.start <- which.min(abs(xs - muobs))
+x.end <- length(xs)
+y1.all <- dnorm(seq(muobs, 1.5, 0.01), mean = 0, sd = se)
+y2.all <- dnorm(seq(muobs, 1.5, 0.01), mean = mubar, sd = se)
+polygon(c(x.start, x.start:x.end), c(0, y2.all), col = "darkgreen")
+polygon(c(x.start, x.start:x.end), c(0, y1.all), col = "darkblue")
+
+axis(1, at = seq(1:length(xs))[c(TRUE, rep(FALSE, 9))], labels = xs[c(TRUE, rep(FALSE, 9))])
+@
+
+Paralleles gilt für größere beobachtete Abweichungen von $0$ wie in Abbildung~\ref{fig:sev3} mit $\mu_1=0.6$ und $\mu'=0.2$.
+Hier gilt $\mathcal{N}(2)=0.98$ wegen $\mu_1-\mu'=0.6-0.2=0.4$ bei $SE=0.2$.
+Steigt der Beobachtungswert $\mu_1$ oder sinkt der Schätzwert $\mu'$, dessen Severity zu bewerten ist, wird die Severity größer.
+Daher stellt die Berechnung mit (\ref{eq:SEV}) allgemein eine Untergrenze für SEV dar.
+
+\begin{equation}
+  SEV(\mu>\mu')=P(\bar{X}<\mu_1;\mu<\mu')=\mathcal{N}(\frac{\mu_1-\mu'}{SE})
+  \label{eq:SEV}
+\end{equation}
+
+
+<<sev3, dev='pdf', echo=FALSE, fig.cap="Severity for H': mu'>0.2 bei der Beobachtung mu1=0.6", fig.height=4, fig.pos="!htbp">>=
+sd <- 2
+n <- 100
+se <- sd/sqrt(n)
+mubar = 0.2
+muobs <- 0.6
+xs <- seq(-1, 1.5, 0.01)
+sev <- 1-qnorm(p = 0.4, mean = mubar, sd = se, lower.tail = T)
+
+plot(dnorm(xs, mean = 0, sd = se), type = "l", xaxt = "n", col = 1, lwd = 2,
+     ylab="", xlab = "", yaxt = "n", frame.plot = F)
+lines(rep(which.min(abs(xs - 0)), 2), c(0, dnorm(0, mean = 0, sd = se)), col = 1, lwd = 1, lty = 3)
+
+lines(dnorm(xs, mean = mubar, sd = se), col = "darkred", lwd = 2)
+lines(rep(which.min(abs(xs - mubar)), 2), c(0, dnorm(mubar, mean = mubar, sd = se)), col = "darkred", lwd = 1, lty = 3)
+
+x.start <- which.min(abs(xs - muobs))
+x.end <- length(xs)
+y1.all <- dnorm(seq(muobs, 1.5, 0.01), mean = 0, sd = se)
+y2.all <- dnorm(seq(muobs, 1.5, 0.01), mean = mubar, sd = se)
+polygon(c(x.start, x.start:x.end), c(0, y2.all), col = "darkgreen")
+polygon(c(x.start, x.start:x.end), c(0, y1.all), col = "darkblue")
+
+axis(1, at = seq(1:length(xs))[c(TRUE, rep(FALSE, 9))], labels = xs[c(TRUE, rep(FALSE, 9))])
+@
+
+Für drei Beobachtungen ($\mu_1=0.4$, $\mu_2=0.6$, $\mu_3=1.0$) zeigt Abbildung~\ref{fig:sev4} die Severity-Kurven für $\delta\in[0,1]$.
+
+<<sev4, dev='pdf', echo=FALSE, fig.cap="Severity-Kurven für verschiedene Beobachtungen", fig.height=6, fig.pos="!htbp">>=
+# Sig level.
+sig <- 0.05
+
+# Hypothesis.
+# H0 : mu = 0
+# H1 : mu > 0
+
+# Parameters of the experiment.
+sd <- 2
+n <- 100
+
+# The three outcomes.
+mu1 <- 0.4
+mu2 <- 0.6
+mu3 <- 1.0
+
+# Significance tests for the tree outcomes.
+se <- sd/sqrt(n)
+
+z1 <- mu1/se
+p1 <- 1-pnorm(z1)
+
+z2 <- mu2/se
+p2 <- 1-pnorm(z2)
+
+z3 <- mu3/se
+p3 <- 1-pnorm(z3)
+
+### Severity curves for the outcomes.
+
+# 1. Get z statistics for a range of discrepancies from H0.
+ds <- seq(0, 1, 0.01)
+zs <- ds/se
+
+# 2. Get difference between z for observed and hypothetical discrepancy.
+z1s <- zs-z1
+z2s <- zs-z2
+z3s <- zs-z3
+
+# 3. Get corresponding p value.
+sevs1 <- 1-pnorm(z1s)
+sevs2 <- 1-pnorm(z2s)
+sevs3 <- 1-pnorm(z3s)
+
+plot(sevs1, type = "l", xaxt = "n", bty = "n", ylab = "", xlab = "",
+     col = 1, lty = 1, lwd = 2)
+lines(sevs2, col = 2, lty =2, lwd = 2)
+lines(sevs3, col = 3, lty = 3, lwd = 2)
+
+lines(x = c(20, 20, 0), y = c(0, sevs1[which(ds == 0.2)], sevs1[which(ds == 0.2)]), col = "darkgreen", lty = 2, lwd = 1)
+text(x = 22, y = 0.4, labels = "H1': mu >= 0.2", col = "darkgreen", adj = 0, srt = 90)
+
+lines(x = c(30, 30, 0), y = c(0, sevs1[which(ds == 0.3)], sevs1[which(ds == 0.3)]), col = "violet", lty = 2, lwd = 1)
+text(x = 32, y = 0.2, labels = "H1'': mu >= 0.3", col = "violet", adj = 0, srt = 90)
+
+lines(x = c(mu1 * 100, mu1 * 100), y = c(0, sevs1[mu1*100]),
+      col = 1, lty = 1, lwd = 2)
+text(x = (mu1 + 0.01) * 100, y = 0.4, labels = "", col = 1, adj = 0)
+
+lines(x = c(mu2 * 100, mu2 * 100), y = c(0, sevs2[mu2*100]),
+      col = 2, lty = 2, lwd = 2)
+text(x = (mu2 + 0.01) * 100, y = 0.4, labels = "", col = 2, adj = 0)
+
+lines(x = c(mu3 * 100, mu3 * 100), y = c(0, sevs3[mu3*100]),
+      col = 3, lty = 3, lwd = 2)
+text(x = (mu3 + 0.01) * 100, y = 0.4, labels = "", col = 3, adj = 0)
+
+axis(1, at = seq(0, 100, 10), labels = seq(0, 1, 0.1))
+title(xlab="Inferierte Abweichung (delta) von H0 (Obergrenze)", ylab="SEV")
+legend("bottomleft", c("mu1=0.4", "mu2=0.6", "mu2=1.0"),
+       bty = "n", col = 1:3, lty = 1:3, cex = 0.75, lwd = 2)
+@
+
+\section{Zweiseitige Tests}
+
+
+
+
+\end{document}
+
+
