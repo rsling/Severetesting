@@ -81,7 +81,7 @@ Die $H_0$ wird zurückgewiesen.
 Der p-Wert gibt zusätzlich darüber Auskunft, wie gut die Evidenz für die Zurückweisung war, denn (\ref{eq:sigdiff}).
 
 \begin{equation}
-  P(\mu_1\geq0.4; \mu=0) < P(\mu_2\geq0.6; \mu=0) < P(\mu_3\geq1.0; \mu=0)
+  P(\mu_1\geq0.4; \mu=0) > P(\mu_2\geq0.6; \mu=0) > P(\mu_3\geq1.0; \mu=0)
   \label{eq:sigdiff}
 \end{equation}
 
