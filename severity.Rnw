@@ -134,7 +134,7 @@ In diesem Fall wären also $\mathcal{N}(1)=0.84$ ($84$\%) der Werte kleiner als 
 Die Klausel \textit{is true} nach dem Semikolon wurde als redundant ausgelassen.
 
 \begin{equation}
-  SEV(\mu>0.2)=(P(\bar{X})<0.4;\mu\leq 0.2)
+  SEV(\mu>0.2)=P(\bar{X}<0.4;\mu\leq 0.2)
   \label{eq:sev1}
 \end{equation}
 
