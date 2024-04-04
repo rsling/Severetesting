@@ -134,7 +134,7 @@ In diesem Fall wären also $\mathcal{N}(1)=0.84$ ($84$\%) der Werte kleiner als 
 Die Klausel \textit{is true} nach dem Semikolon wurde als redundant ausgelassen.
 
 \begin{equation}
-  SEV(\mu>0.2)=(P(\bar{X})<0.4;\mu\leq 0.2)
+  SEV(\mu>0.2)=P(\bar{X}<0.4;\mu\leq 0.2)
   \label{eq:sev1}
 \end{equation}
 
@@ -164,7 +164,22 @@ polygon(c(x.start, x.start:x.end), c(0, y1.all), col = "darkblue")
 axis(1, at = seq(1:length(xs))[c(TRUE, rep(FALSE, 9))], labels = xs[c(TRUE, rep(FALSE, 9))])
 @
 
-Berechnet wird hier die \textit{minimale} Severity.
+Berechnet wird hier die \textit{minimale} Severity. Das sagt Mayo in unter der namenlosen Gleichung auf S. 169. Ich sehe damit 2 Probleme:
+
+\begin{enumerate}
+\item The measured value should be a parameter of SEV, right now?
+\item The composite character of the hypothesis should be incorporated in the def itself.
+\end{enumerate}
+
+We would get sth more like
+
+\begin{equation}
+  SEV(\mu>0.2, .4)=\min_{\mu^\prime\leq 0.2} P(\bar{x}<0.4;\mu=\mu^\prime) = P(\bar{x}<0.4;\mu=.2)
+  \label{eq:sev2}
+\end{equation}
+
+
+
 Abbildung~\ref{fig:sev2} zeigt dasselbe für $\mu'=0.1$.
 Trivialerweise $\mu_1-\mu'=0.4-0.1=0.3$.
 Bei $SE=0.2$ entspricht die Fläche unter der Kurve minus der grünen Schleppe einem Anteil von $\mathcal{N}(1.5)=0.93$.
