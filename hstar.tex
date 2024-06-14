@@ -1,0 +1,58 @@
+\documentclass{article}
+\usepackage[a4paper]{geometry} % showframe
+\usepackage{graphicx}
+\usepackage{icomma} % german kommas
+\usepackage{csquotes}
+\usepackage{parskip}
+\usepackage{filecontents}
+\usepackage{siunitx}
+\usepackage[english]{isodate}
+\usepackage{hyperref}
+\usepackage[all]{hypcap}    %for going to the top of an image when a figure reference is clicked\usepackage{graphicx}
+\usepackage{booktabs}
+\renewcommand{\arraystretch}{1.2}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+\setsansfont{Latin Modern Sans}
+\setmainfont{Latin Modern Sans}
+
+\begin{document}
+\enquote{The severity of \enquote{passing} $H_i^∗$ is minimal or 0.} (p. 32)
+
+\paragraph{Why don't I agree with this sentence?} p. 164 says
+
+\begin{quote}
+  A hypothesis $H$ passes a severe test $T$ with data $x_0$ if,
+  \begin{description}
+  \item [(S-1)] $x_0$ accords with $H$, (for a suitable notion of accordance) and
+    
+  \item [(S-2)] with very high probability, test $T$ would have produced a result
+    that accords less well with $H$ than $x_0$ does, if H were false or incorrect.
+    
+    Equivalently, (S-2) can be stated:
+
+    
+  \item [(S-2)*]: with very low probability, test $T$ would have produced a result
+    that accords as well as or better with H than $x_0$ does, if $H$ were false
+    or incorrect.
+  \end{description}
+\end{quote}
+
+We look at $H_i^*$ which states that the probability of the data is 1.
+
+In the definitions of severity I cannot find the precondition that the tested hypothesis has to be selected before the data are collected.
+
+If accordingly we only look at (S-1) and (S-2), (S-1) is clearly satisfied because the data accord with the hypothesis, per def.
+
+If $H_i^*$ is false (which it most certainly is), the probability that $T$ would have produced a result that accords less well with it, is/was high, it just did not.
+
+So for this data this special hypothesis passed a very severe test. It would obviously fail every further test of this kind, since it is fixed now. But it (nominally) passed this first test, at least according to the words of the text, as I read them.
+
+
+Only if, from the outset, in advance, you define $H_i^*$ as a quasi dynamic hypothesis, that whatever the data will be has a probability of 1, the severity is low, because (S-2) trivially does not hold anymore.
+
+But is this even a hypothesis?
+
+\end{document}
