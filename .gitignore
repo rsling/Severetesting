@@ -5,9 +5,11 @@ figure/
 *.fls
 *.log
 *.synctex.gz
-*.tex
 *.xdv
-
+*~
+*.out
+*.aux
+*.pdf
 
 # output html
 *.html
